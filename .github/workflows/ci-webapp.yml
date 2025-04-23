@@ -3,10 +3,10 @@ name: CI - Webapp (Frontend)
 on:
   push:
     paths:
-      - 'webapp/**'
+      - 'pitstop-webapp/**'
   pull_request:
     paths:
-      - 'webapp/**'
+      - 'pitstop-webapp/**'
 
 jobs:
   build-and-push:
@@ -28,6 +28,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./webapp
+          context: ./pitstop-webapp
           push: true
           tags: hichamben21/webapp:latest

@@ -28,6 +28,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./pitstop-workshop
+          context: ./pitstop-workshop-planning
           push: true
           tags: hichamben21/workshop-service:latest

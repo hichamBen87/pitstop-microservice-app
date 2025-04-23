@@ -3,10 +3,10 @@ name: CI - Gateway
 on:
   push:
     paths:
-      - 'gateway/**'
+      - 'pitstop-express-gateway/**'
   pull_request:
     paths:
-      - 'gateway/**'
+      - 'pitstop-express-gateway/**'
 
 jobs:
   build-and-push:
@@ -28,6 +28,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./gateway
+          context: ./pitstop-express-gateway
           push: true
           tags: hichamben21/gateway:latest

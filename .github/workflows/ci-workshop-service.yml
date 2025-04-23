@@ -3,10 +3,10 @@ name: CI - Workshop Service
 on:
   push:
     paths:
-      - 'pitstop-workshop/**'
+      - 'pitstop-workshop-planning/**'
   pull_request:
     paths:
-      - 'pitstop-workshop/**'
+      - 'pitstop-workshop-planning/**'
 
 jobs:
   build-and-push:

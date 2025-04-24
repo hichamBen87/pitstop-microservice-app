@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pitstop-vehicle-hicham-benjabrou
+  namespace: argocd
+  labels:
+    owner: hicham.benjabrou
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/hichamBen87/pitstop-microservice-app
+    targetRevision: main
+    path: k8s/pitstop-vehicle
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pitstop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

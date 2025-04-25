@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitstop-vehicle
+  labels:
+    app: pitstop-vehicle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitstop-vehicle
+  template:
+    metadata:
+      labels:
+        app: pitstop-vehicle
+    spec:
+      containers:
+        - name: pitstop-vehicle
+          image: hichamben21/vehicle-service:latest
+          ports:
+            - containerPort: 3001

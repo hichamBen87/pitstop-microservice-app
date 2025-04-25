@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitstop-customer
+  labels:
+    app: pitstop-customer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitstop-customer
+  template:
+    metadata:
+      labels:
+        app: pitstop-customer
+    spec:
+      containers:
+        - name: pitstop-customer
+          image: hichamben21/customer-service:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: "localhost"  # À modifier si tu relies à une vraie base plus tard

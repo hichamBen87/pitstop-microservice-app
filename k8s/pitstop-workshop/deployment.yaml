@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitstop-workshop
+  namespace: pitstop
+  labels:
+    app: pitstop-workshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitstop-workshop
+  template:
+    metadata:
+      labels:
+        app: pitstop-workshop
+    spec:
+      containers:
+        - name: pitstop-workshop
+          image: hichamben21/workshop-service:latest
+          ports:
+            - containerPort: 3004

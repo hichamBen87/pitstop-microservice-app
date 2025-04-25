@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitstop-express-gateway
+  namespace: pitstop
+  labels:
+    app: pitstop-express-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitstop-express-gateway
+  template:
+    metadata:
+      labels:
+        app: pitstop-express-gateway
+    spec:
+      containers:
+        - name: pitstop-express-gateway
+          image: hichamben21/gateway-service:latest
+          ports:
+            - containerPort: 3003

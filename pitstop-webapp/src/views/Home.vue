@@ -11,19 +11,6 @@
       <v-col cols="12" class="fill-height">
         <v-card class="elevation-0">
           <v-card-text class="pa-0">
-            <!-- <v-img  src="@/assets/garage-image.jpg">
-              <v-overlay absolute color="primary">
-                <v-layout
-                  class="d-flex flex-column align-center justify-center"
-                  cols="12"
-                >
-                  <h1 class="text-h4 font-weight-thin mb-4 text-uppercase">
-                    With pitstop
-                  </h1>
-                  <h4 class="subheading">Everything is possible!</h4>
-                </v-layout>
-              </v-overlay>
-            </v-img> -->
             <v-img
               src="@/assets/garage-image.jpg"
               max-height="500"
@@ -34,18 +21,20 @@
                   <h1 class="text-h4 font-weight-bold mb-4 text-uppercase">
                     pit<span class="font-weight-thin">stop</span>
                   </h1>
-                  <h4 class="subheading">Everything is possible!</h4>
+                  <h4 class="subheading green--text">
+                    🚀 Powered by Hicham Benjabrou
+                  </h4>
                 </v-col>
               </v-row>
             </v-img>
 
             <!-- Info -->
             <div class="pa-8 d-flex flex-column">
-              <span class="font-weight-bold text-h6 mb-2"
-                >Full-Service Auto Repair & Maintenance Here at The Garage Auto
+              <span class="font-weight-bold text-h6 mb-2">
+                Full-Service Auto Repair & Maintenance Here at The Garage Auto
               </span>
-              <span class="text-subtitle-2"
-                >Repair in Broken Arrow we know you rely on your vehicle for a
+              <span class="text-subtitle-2">
+                Repair in Broken Arrow we know you rely on your vehicle for a
                 lot of things. It has to get you to work, the kids to school,
                 and all the other obligations in between. Sometimes, your car
                 slows down, but life doesn’t, which is why we pride ourselves on
@@ -62,8 +51,8 @@
                 something, we won’t offer it to you. We are committed to helping
                 you protect your investment and also focused on providing the
                 kind of high-quality auto repair and preventative maintenance
-                that will keep your car running for a long time.</span
-              >
+                that will keep your car running for a long time.
+              </span>
             </div>
           </v-card-text>
         </v-card>
@@ -75,9 +64,9 @@
 <script>
 export default {
   name: "Home",
-
   components: {},
 };
 </script>
+
 <style>
 </style>

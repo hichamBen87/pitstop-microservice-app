@@ -21,9 +21,9 @@
                   <h1 class="text-h4 font-weight-bold mb-4 text-uppercase">
                     pit<span class="font-weight-thin">stop</span>
                   </h1>
-                  <h4 class="subheading green--text">
-                    🚀 Powered by Hicham Benjabrou
-                  </h4>
+                  <h2 class="text-h4 green--text text-center font-weight-bold">
+                   Powered by Hicham Benjabrou
+                  </h2>
                 </v-col>
               </v-row>
             </v-img>

@@ -1,7 +1,8 @@
-name: CI - Webapp (Frontend)
+name: CI – Webapp (build & push)
 
 on:
   push:
+    branches: [main]
     paths:
       - 'pitstop-webapp/**'
   pull_request:
@@ -10,7 +11,11 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, docker]       # 1️⃣
+
+    defaults:                           # 2️⃣
+      run:
+        working-directory: pitstop-webapp
 
     steps:
       - name: Checkout repository
@@ -28,6 +33,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./pitstop-webapp
+          context: .                    # 3️⃣
           push: true
           tags: hichamben21/webapp:latest

@@ -1,0 +1,47 @@
+variables:
+  IMAGE_NAME: hichamben21/pitstop-workshop-planning
+
+stages:
+  - build
+  - scan
+  - clean
+
+build_and_push:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  script:
+    - docker build -t $IMAGE_NAME:$CI_COMMIT_SHORT_SHA .
+    - docker push $IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+scan_dockerfile:
+  stage: scan
+  image: goodwithtech/dockle:latest
+  variables:
+    IMAGE_NAME: hichamben21/pitstop-workshop-planning
+  script:
+    - echo "🔍 Scanning Docker image $IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
+    - dockle --exit-code 1 $IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+
+scan_code:
+  stage: scan
+  image: returntocorp/semgrep
+  script:
+    - semgrep --config=auto .
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+cleanup:
+  stage: clean
+  script:
+    - echo "🧼 Cleanup done."
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'

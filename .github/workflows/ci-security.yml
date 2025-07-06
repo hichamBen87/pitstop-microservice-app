@@ -26,14 +26,14 @@ jobs:
       - name: Install deps
         run: npm ci
 
-  # ──────────────────────────── SAST (Sonar + Semgrep) ──────────────────────────
+   # ──────────────────────────── SAST (Sonar + Semgrep) ──────────────────────────
   sast:
     needs: prepare
     runs-on: [self-hosted, docker]
     if: github.event_name == 'pull_request'        # scanne uniquement les PR
     defaults:
       run:
-        working-directory: pitstop-webapp          # même micro-service
+        working-directory: pitstop-webapp
 
     steps:
       - uses: actions/checkout@v4

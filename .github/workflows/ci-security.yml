@@ -30,7 +30,7 @@ jobs:
   sast:
     needs: prepare
     runs-on: [self-hosted, docker]
-    if: github.event_name == 'pull_request'     # scanne uniquement les PR
+    
     defaults:
       run:
         working-directory: pitstop-webapp      # même micro-service

@@ -9,28 +9,30 @@ on:
 jobs:
   # ───────────────────────────── prepare ─────────────────────────────
   prepare:
-    runs-on: [self-hosted, docker]          # ton runner
+    runs-on: [self-hosted, docker]
     defaults:
       run:
-        working-directory: pitstop-webapp   # dossier du micro-service
+        working-directory: pitstop-webapp      # on reste dans le sous-dossier
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4         # installe Node + active le cache npm
+      - name: Setup Node & npm cache
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
-          cache-dependency-path: pitstop-webapp/package-lock.json  # <-- chemin lockfile
+          # ← chemin RELATIF depuis la racine du dépôt
+          cache-dependency-path: pitstop-webapp/package-lock.json
 
       - name: Install deps
         run: npm ci
 
-  # ───────────────────────────── SAST (Sonar + Semgrep) ───────────────
+  # ───────────────────────────── SAST (Sonar + Semgrep) ──────────────
   sast:
     needs: prepare
     runs-on: [self-hosted, docker]
-    if: github.event_name == 'pull_request'     # scanne seulement les PR
+    if: github.event_name == 'pull_request'        # scanne uniquement les PR
     defaults:
       run:
         working-directory: pitstop-webapp
@@ -38,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # -------- Sonar --------
+      # ---------- SonarCloud ----------
       - name: Sonar Scan
         uses: sonarsource/sonarcloud-github-action@v2
         env:
@@ -49,14 +51,14 @@ jobs:
             -Dsonar.projectKey=pitstop-webapp-hicham
             -Dsonar.organization=hichamben
 
-      # -------- Semgrep --------
+      # ---------- Semgrep ----------
       - name: Semgrep Scan
         uses: returntocorp/semgrep-action@v1
         with:
-          config: p/react                    # règles React
+          config: p/react
           generateSarif: true
 
-      # -------- Bloquer si sévérité >= 5 --------
+      # ---------- Bloquer si CVSS ≥ 5 ----------
       - name: Fail if CVSS >=5
         run: |
           n=$(jq '.runs[].results

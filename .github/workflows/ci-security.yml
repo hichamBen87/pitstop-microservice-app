@@ -23,7 +23,7 @@ jobs:
           node-version: 18
           cache: npm
           # <<< ICI le chemin RELATIF depuis la racine du dépôt >>>
-          cache-dependency-path: pitstop-webapp/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install deps
         run: npm ci

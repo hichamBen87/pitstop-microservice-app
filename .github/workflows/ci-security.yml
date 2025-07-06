@@ -9,18 +9,19 @@ on:
 jobs:
   # ───────────────────────────── prepare ─────────────────────────────
   prepare:
-    runs-on: [self-hosted, docker]              # ton runner
+    runs-on: [self-hosted, docker]          # ton runner
     defaults:
       run:
-        working-directory: pitstop-webapp       # dossier du micro-service
+        working-directory: pitstop-webapp   # dossier du micro-service
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4             # installe Node
+      - uses: actions/setup-node@v4         # installe Node + active le cache npm
         with:
           node-version: 18
-          cache: 'npm'
+          cache: npm
+          cache-dependency-path: pitstop-webapp/package-lock.json  # <-- chemin lockfile
 
       - name: Install deps
         run: npm ci

@@ -12,7 +12,7 @@ jobs:
     runs-on: [self-hosted, docker]
     defaults:
       run:
-        working-directory: pitstop-webapp        # ok, on garde
+        working-directory: pitstop-webapp      # on reste dans le sous-dossier
 
     steps:
       - uses: actions/checkout@v4
@@ -22,8 +22,8 @@ jobs:
         with:
           node-version: 18
           cache: npm
-          # <<< ICI le chemin RELATIF depuis la racine du dépôt >>>
-          cache-dependency-path: package-lock.json
+          # ← chemin RELATIF depuis la racine du dépôt
+          cache-dependency-path: pitstop-webapp/package-lock.json
 
       - name: Install deps
         run: npm ci
@@ -32,7 +32,7 @@ jobs:
   sast:
     needs: prepare
     runs-on: [self-hosted, docker]
-    if: github.event_name == 'pull_request'     # scanne uniquement les PR
+    if: github.event_name == 'pull_request'        # scanne uniquement les PR
     defaults:
       run:
         working-directory: pitstop-webapp
@@ -55,8 +55,8 @@ jobs:
       - name: Semgrep Scan
         uses: returntocorp/semgrep-action@v1
         with:
-          config: p/react          # règles React
-          generateSarif: true      # produit semgrep.sarif
+          config: p/react
+          generateSarif: true
 
       # ---------- Bloquer si CVSS ≥ 5 ----------
       - name: Fail if CVSS >=5

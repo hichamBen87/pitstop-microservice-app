@@ -68,3 +68,37 @@ jobs:
             echo "::error::Critical SAST finding (CVSS >=5)."
             exit 1
           fi
+
+
+      # ----------  job image-scan ----------    
+  image-scan:
+    needs: prepare
+    runs-on: self-hosted
+    steps:
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./pitstop-webapp        # ← adapte 
+          tags: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
+          load: true
+
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@v0.11.0
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          format: table
+          output: trivy-report.txt
+
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy-report
+          path: trivy-report.txt
+          retention-days: 3
+
+      - name: Snyk scan
+        uses: snyk/actions/node@v2
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor

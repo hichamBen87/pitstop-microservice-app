@@ -100,10 +100,9 @@ jobs:
         with:
           node-version: 18
 
-      - name: Snyk scan
-        uses: snyk/actions/node@0.4.0
+      - name: Snyk monitor (manual)
+        run: npx snyk monitor
+        working-directory: pitstop-webapp
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: monitor
-          project-directory: pitstop-webapp
+         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+

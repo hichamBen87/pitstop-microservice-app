@@ -12,7 +12,7 @@ jobs:
     runs-on: [self-hosted, docker]
     defaults:
       run:
-        working-directory: pitstop-webapp      # on reste dans le sous-dossier
+        working-directory: pitstop-webapp
 
     steps:
       - uses: actions/checkout@v4
@@ -22,17 +22,16 @@ jobs:
         with:
           node-version: 18
           cache: npm
-          # ← chemin RELATIF depuis la racine du dépôt
           cache-dependency-path: pitstop-webapp/package-lock.json
 
       - name: Install deps
         run: npm ci
 
-  # ───────────────────────────── SAST (Sonar + Semgrep) ──────────────
+  # ──────────────────────── SAST (Sonar + Semgrep) ───────────────────────
   sast:
     needs: prepare
     runs-on: [self-hosted, docker]
-    if: github.event_name == 'pull_request'        # scanne uniquement les PR
+    if: github.event_name == 'pull_request'
     defaults:
       run:
         working-directory: pitstop-webapp
@@ -40,7 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ---------- SonarCloud ----------
       - name: Sonar Scan
         uses: sonarsource/sonarcloud-github-action@v2
         env:
@@ -51,14 +49,12 @@ jobs:
             -Dsonar.projectKey=pitstop-webapp-hicham
             -Dsonar.organization=hichamben
 
-      # ---------- Semgrep ----------
       - name: Semgrep Scan
         uses: returntocorp/semgrep-action@v1
         with:
           config: p/react
           generateSarif: true
 
-      # ---------- Bloquer si CVSS ≥ 5 ----------
       - name: Fail if CVSS >=5
         run: |
           n=$(jq '.runs[].results
@@ -69,15 +65,17 @@ jobs:
             exit 1
           fi
 
-
-      # ----------  job image-scan ----------    
+  # ───────────────────────────── image-scan ─────────────────────────────
   image-scan:
     needs: prepare
-    runs-on: self-hosted
+    runs-on: [self-hosted, docker]
+
     steps:
+      - uses: actions/checkout@v4
+
       - uses: docker/build-push-action@v5
         with:
-          context: ./pitstop-webapp        # ← adapte 
+          context: ./pitstop-webapp
           tags: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
           load: true
 

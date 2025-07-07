@@ -99,9 +99,11 @@ jobs:
           retention-days: 3
 
       - name: Snyk scan
-        uses: snyk/actions/node@0.4.0
+        run: |
+          npm install -g snyk
+          snyk monitor
+        working-directory: ./pitstop-webapp
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: monitor
-          project-directory: ./pitstop-webapp
+
+          

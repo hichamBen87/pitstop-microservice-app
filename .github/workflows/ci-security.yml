@@ -2,7 +2,7 @@ name: CI-Sec Frontend
 
 on:
   push:
-    branches: [main]
+    branches: [main, test-image-scan]  # ← ajoute ta branche ici
   pull_request:
     branches: [main]
 

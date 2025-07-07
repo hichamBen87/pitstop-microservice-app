@@ -80,7 +80,7 @@ jobs:
           load: true
 
       - name: Trivy scan
-        uses: aquasecurity/trivy-action@v0.11.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
           severity: CRITICAL,HIGH

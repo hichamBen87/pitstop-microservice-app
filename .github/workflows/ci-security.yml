@@ -2,12 +2,12 @@ name: CI-Sec Frontend
 
 on:
   push:
-    branches: [main, test-image-scan]  # ← ajoute ta branche ici
+    branches: [main, test-image-scan]  # ← active sur les deux branches
   pull_request:
     branches: [main]
 
 jobs:
-  # ───────────────────────────── prepare ─────────────────────────────
+  # ────────────── prepare ──────────────
   prepare:
     runs-on: [self-hosted, docker]
     defaults:
@@ -27,7 +27,7 @@ jobs:
       - name: Install deps
         run: npm ci
 
-  # ──────────────────────── SAST (Sonar + Semgrep) ───────────────────────
+  # ────────────── SAST (Sonar + Semgrep) ──────────────
   sast:
     needs: prepare
     runs-on: [self-hosted, docker]
@@ -65,15 +65,19 @@ jobs:
             exit 1
           fi
 
-  # ───────────────────────────── image-scan ─────────────────────────────
+  # ────────────── image-scan (Trivy + Snyk) ──────────────
   image-scan:
     needs: prepare
     runs-on: [self-hosted, docker]
+    defaults:
+      run:
+        working-directory: pitstop-webapp
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: docker/build-push-action@v5
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
         with:
           context: ./pitstop-webapp
           tags: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}

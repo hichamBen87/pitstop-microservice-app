@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  # ────────────── prepare ──────────────
+  # ────────────── PREPARE ──────────────
   prepare:
     runs-on: [self-hosted, docker]
     defaults:
@@ -65,13 +65,10 @@ jobs:
             exit 1
           fi
 
-  # ────────────── image-scan (Trivy + Snyk) ──────────────
+  # ────────────── IMAGE SCAN (Trivy + Snyk) ──────────────
   image-scan:
     needs: prepare
     runs-on: [self-hosted, docker]
-    defaults:
-      run:
-        working-directory: pitstop-webapp
 
     steps:
       - uses: actions/checkout@v4
@@ -80,13 +77,13 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./pitstop-webapp
-          tags: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
+          tags: webapp:test
           load: true
 
       - name: Trivy scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
+          image-ref: webapp:test
           severity: CRITICAL,HIGH
           format: table
           output: trivy-report.txt
@@ -104,12 +101,8 @@ jobs:
           node-version: 18
 
       - name: Snyk scan
-        run: |
-          npm install -g snyk
-          snyk monitor
-        working-directory: ./pitstop-webapp
+        uses: snyk/actions/node@0.4.0
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-
-          
+        with:
+          command: monitor

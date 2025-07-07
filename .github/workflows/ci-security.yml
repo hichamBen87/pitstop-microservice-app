@@ -95,7 +95,7 @@ jobs:
           retention-days: 3
 
       - name: Snyk scan
-        uses: snyk/actions/node@v2.1.0
+        uses: snyk/actions/node@release
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:

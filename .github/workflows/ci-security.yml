@@ -98,6 +98,11 @@ jobs:
           path: trivy-report.txt
           retention-days: 3
 
+      - name: Setup Node.js for Snyk
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
       - name: Snyk scan
         run: |
           npm install -g snyk
@@ -105,5 +110,6 @@ jobs:
         working-directory: ./pitstop-webapp
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 
           

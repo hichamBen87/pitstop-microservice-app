@@ -106,14 +106,22 @@ jobs:
         env:
          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-  # ────────────── SECRETS SCAN (GitLeaks) ──────────────
+  
+  # ────────────── SECRETS (GitLeaks) ──────────────
   secrets:
     needs: prepare
-    runs-on: self-hosted
+    runs-on: [self-hosted, docker]
+    defaults:
+      run:
+        working-directory: pitstop-webapp
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: GitLeaks Scan
+      - name: Run GitLeaks
         uses: zricethezav/gitleaks-action@v2
         with:
-          args: --verbose --redact --exit-code=2
+          scan-mode: "git"
+        env:
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+

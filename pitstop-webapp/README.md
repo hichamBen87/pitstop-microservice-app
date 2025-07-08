@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+# Simulation d'une fuite de secret pour test GitLeaks
+AWS_SECRET=ABCD1234EXEMPLE
+
+

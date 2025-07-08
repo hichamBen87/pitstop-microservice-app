@@ -109,12 +109,11 @@ jobs:
   # ────────────── SECRETS SCAN (GitLeaks) ──────────────
   secrets:
     needs: prepare
-    runs-on: [self-hosted, docker]
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
-      # GitLeaks scan to detect hardcoded secrets
       - name: GitLeaks Scan
         uses: zricethezav/gitleaks-action@v2
         with:
-          fail: "true"
+          args: --verbose --redact --exit-code=2

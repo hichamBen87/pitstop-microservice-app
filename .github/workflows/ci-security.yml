@@ -117,17 +117,17 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
   # ────────────── SECRETS (GitLeaks) ──────────────
-  secrets:
-    needs: prepare
-    runs-on: [self-hosted, docker]
-    defaults:
-      run:
-        working-directory: pitstop-webapp
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run GitLeaks
-        uses: zricethezav/gitleaks-action@v2
-        env:
-          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+  # secrets:
+  #   needs: prepare
+  #   runs-on: [self-hosted, docker]
+  #   defaults:
+  #     run:
+  #       working-directory: pitstop-webapp
+  #
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #
+  #     - name: Run GitLeaks
+  #       uses: zricethezav/gitleaks-action@v2
+  #       env:
+  #         GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"

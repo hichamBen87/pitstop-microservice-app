@@ -152,7 +152,7 @@ jobs:
         working-directory: pitstop-webapp
 
       - name: Build frontend
-        run: npm run build
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
         working-directory: pitstop-webapp
 
       - name: Install static server

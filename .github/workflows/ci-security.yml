@@ -133,6 +133,7 @@ jobs:
   #         GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
 
   # ────────────── DAST (ZAP Baseline) ──────────────
+    # ────────────── DAST (ZAP Baseline) ──────────────
   dast:
     needs: image-scan
     runs-on: ubuntu-latest
@@ -150,8 +151,15 @@ jobs:
         run: npm ci
         working-directory: pitstop-webapp
 
-      - name: Start frontend (background)
-        run: npm run dev &
+      - name: Build frontend
+        run: npm run build
+        working-directory: pitstop-webapp
+
+      - name: Install static server
+        run: npm install -g serve
+
+      - name: Start static server
+        run: serve -s dist -l 8080 &
         working-directory: pitstop-webapp
 
       - name: Wait for service to be ready

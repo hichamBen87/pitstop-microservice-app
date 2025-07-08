@@ -106,3 +106,15 @@ jobs:
         env:
          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
+  # ────────────── SECRETS SCAN (GitLeaks) ──────────────
+  secrets:
+    needs: prepare
+    runs-on: [self-hosted, docker]
+    steps:
+      - uses: actions/checkout@v4
+
+      # GitLeaks scan to detect hardcoded secrets
+      - name: GitLeaks Scan
+        uses: zricethezav/gitleaks-action@v2
+        with:
+          fail: "true"

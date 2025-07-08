@@ -133,7 +133,6 @@ jobs:
   #         GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
 
   # ────────────── DAST (ZAP Baseline) ──────────────
-    # ────────────── DAST (ZAP Baseline) ──────────────
   dast:
     needs: image-scan
     runs-on: ubuntu-latest
@@ -173,5 +172,5 @@ jobs:
       - name: Upload ZAP report
         uses: actions/upload-artifact@v4
         with:
-          name: zap-report
+          name: zapreport
           path: report_html.html

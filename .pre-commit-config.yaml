@@ -1,27 +1,25 @@
 repos:
   # Dépôt officiel des hooks de base de pre-commit
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0  # Version spécifique (tag) du dépôt à utiliser
+    rev: v4.5.0 # Version spécifique (tag) du dépôt à utiliser
     hooks:
-      - id: trailing-whitespace  # Supprime les espaces inutiles en fin de ligne
-      - id: end-of-file-fixer     # Vérifie et ajoute une ligne vide à la fin des fichiers si manquante
-      - id: check-yaml            # Vérifie que les fichiers YAML sont valides
-      - id: check-added-large-files  # Avertit si un fichier de grande taille est ajouté (par défaut >500Ko)
+      - id: trailing-whitespace # Supprime les espaces inutiles en fin de ligne
+      - id: end-of-file-fixer # Vérifie et ajoute une ligne vide à la fin des fichiers si manquante
+      - id: check-yaml # Vérifie que les fichiers YAML sont valides
+      - id: check-added-large-files # Avertit si un fichier de grande taille est ajouté (par défaut >500Ko)
 
   # Dépôt mirror officiel de Prettier (outil de formatage de code)
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0  # Version de Prettier à utiliser
+    rev: v3.0.0 # Version de Prettier à utiliser
     hooks:
       - id: prettier
-        files: "\\.(js|jsx|ts|tsx|vue|css|scss|json|md|yaml|yml)$"  
+        files: "\\.(js|jsx|ts|tsx|vue|css|scss|json|md|yaml|yml)$"
         # Ce hook applique Prettier uniquement aux fichiers avec les extensions listées
 
   # Dépôt officiel de GitLeaks (outil de détection de secrets)
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.18.1  # Version de GitLeaks
+    rev: v8.18.1 # Version de GitLeaks
     hooks:
       - id: gitleaks
         args: ["protect", "--staged"]
         # Analyse les fichiers *staged* pour détecter des secrets (mots de passe, clés, etc.)
-
-

@@ -9,33 +9,7 @@ on:
 jobs:
   # ────────────── PREPARE ──────────────
   prepare:
-    runs-on: [self-hosted, docker]
-    defaults:
-      run:
-        working-directory: pitstop-webapp
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Pull secrets from Vault
-        run: |
-          echo "DB_PASS=$(vault kv get -field=value secret/db_password)" >> $GITHUB_ENV
-        env:
-          VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-          VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}
-
-      - name: Setup Node & npm cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: npm
-          cache-dependency-path: pitstop-webapp/package-lock.json
-
-      - name: Install deps
-        run: npm ci
-
-      - name: Debug Vault Secret
-        run: echo "DB_PASS is $DB_PASS"
+    uses: ./.github/workflows/_build-template.yml
 
   # ────────────── SAST (Sonar + Semgrep) ──────────────
   sast:
@@ -116,22 +90,6 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-  # ────────────── SECRETS (GitLeaks) ──────────────
-  # secrets:
-  #   needs: prepare
-  #   runs-on: [self-hosted, docker]
-  #   defaults:
-  #     run:
-  #       working-directory: pitstop-webapp
-  #
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #
-  #     - name: Run GitLeaks
-  #       uses: zricethezav/gitleaks-action@v2
-  #       env:
-  #         GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
-
   # ────────────── DAST (ZAP Baseline) ──────────────
   dast:
     needs: image-scan
@@ -172,9 +130,29 @@ jobs:
       - name: Upload ZAP reports
         uses: actions/upload-artifact@v4
         with:
-         name: zapreport
-         path: |
-          report_html.html
-          report_md.md
-          report_json.json
+          name: zapreport
+          path: |
+            report_html.html
+            report_md.md
+            report_json.json
+  # ────────────── NOTIFY (Slack) ──────────────
+  notify:
+    if: always()
+    needs: [sast, image-scan, dast]
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Slack Notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "*CI-Sec Frontend Pipeline* : `${{ github.workflow }}` - `${{ github.job }}`",
+              "attachments": [
+                {
+                  "text": "Status: `${{ job.status }}`\nRepo: `${{ github.repository }}`\nRef: `${{ github.ref }}`\n[View Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

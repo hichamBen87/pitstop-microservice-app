@@ -41,9 +41,9 @@ metadata:
   name: pitstop-workshop-database-service
 spec:
   ports:
-   - name: mysql
-     port: 3308
-     targetPort: 3306
+    - name: mysql
+      port: 3308
+      targetPort: 3306
   selector:
     app: pitstop-workshop-database
   type: ClusterIP
@@ -64,18 +64,18 @@ spec:
         app: pitstop-workshop-database
     spec:
       containers:
-      - image: mysql:5.6
-        name: mysql
-        envFrom:
+        - image: mysql:5.6
+          name: mysql
+          envFrom:
             - configMapRef:
                 name: pitstop-workshop-database-configmap
-        ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: workshopdb-persistent-storage
-          mountPath: /var/lib/mysql
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: workshopdb-persistent-storage
+              mountPath: /var/lib/mysql
       volumes:
-      - name: workshopdb-persistent-storage
-        persistentVolumeClaim:
-          claimName: workshop-db-pv-claim
+        - name: workshopdb-persistent-storage
+          persistentVolumeClaim:
+            claimName: workshop-db-pv-claim

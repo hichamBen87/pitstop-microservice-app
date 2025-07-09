@@ -3,10 +3,10 @@ name: CI - Webapp (Frontend)
 on:
   push:
     paths:
-      - 'pitstop-webapp/**'
+      - "pitstop-webapp/**"
   pull_request:
     paths:
-      - 'pitstop-webapp/**'
+      - "pitstop-webapp/**"
 
 jobs:
   build-and-push:

@@ -60,7 +60,7 @@
                   required
                 ></v-text-field>
               </v-col>
-               <v-col cols="6">
+              <v-col cols="6">
                 <v-text-field
                   label="Postal code*"
                   v-model="customer.postCode"
@@ -89,8 +89,20 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" :disabled="getLoadingCustomers" text @click="dialog = false"> Close </v-btn>
-        <v-btn color="primary" :disabled="getLoadingCustomers" depressed  @click="addCustomer">
+        <v-btn
+          color="primary"
+          :disabled="getLoadingCustomers"
+          text
+          @click="dialog = false"
+        >
+          Close
+        </v-btn>
+        <v-btn
+          color="primary"
+          :disabled="getLoadingCustomers"
+          depressed
+          @click="addCustomer"
+        >
           <v-icon left>mdi-plus</v-icon> Add
         </v-btn>
       </v-card-actions>
@@ -99,7 +111,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex"
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -112,7 +124,7 @@ export default {
         city: "",
         email: "",
         postCode: "",
-        number: ""
+        number: "",
       },
       //Form validation fields rules
       nameRules: [
@@ -142,7 +154,9 @@ export default {
       numberRules: [
         (v) => !!v || "Phone number is required",
         (v) =>
-          /^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/.test(v) ||
+          /^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/.test(
+            v,
+          ) ||
           "Phone number must be moroccan valid: 0(5-6-4)xxxxxxxx or +212(5-6-7)xxxxxxxxxx",
       ],
       postCodeRules: [
@@ -153,8 +167,8 @@ export default {
       ],
     };
   },
-  computed:{
-    ...mapGetters(["getLoadingCustomers"])
+  computed: {
+    ...mapGetters(["getLoadingCustomers"]),
   },
   methods: {
     ...mapActions(["ADD_CUSTOMER"]),
@@ -164,7 +178,7 @@ export default {
         console.log(this.customer);
         //TODO Add customer
         let added = await this.ADD_CUSTOMER(this.customer);
-        if(added){
+        if (added) {
           this.dialog = false;
           alert(`customer ${this.customer.name} has been added successfully`);
         }

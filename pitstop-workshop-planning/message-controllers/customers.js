@@ -1,4 +1,3 @@
-
 let db = require("../models");
 let chalk = require("chalk");
 let logger = require("winston");
@@ -11,13 +10,19 @@ controller.added = async (message) => {
       id: content.id,
       name: content.name,
       number: content.number,
-      email: content.email
+      email: content.email,
     });
 
     // TODO CUSTOMER.ADDED consume event
-    logger.info(chalk.green(`CUSTOMER.ADDED has been consumed from service: ${process.env.SERVICE_NAME} with added customer name: ${content.name}`))
+    logger.info(
+      chalk.green(
+        `CUSTOMER.ADDED has been consumed from service: ${process.env.SERVICE_NAME} with added customer name: ${content.name}`,
+      ),
+    );
   } catch (err) {
-    console.error(`Error in handling the recieved message - customer.added - ${err}`);
+    console.error(
+      `Error in handling the recieved message - customer.added - ${err}`,
+    );
   }
 };
 controller.deleted = async (message) => {
@@ -25,13 +30,19 @@ controller.deleted = async (message) => {
     const content = parseInt(message.content.toString());
     await db.Customer.destroy({
       where: {
-        id: content
-      }
+        id: content,
+      },
     });
     // TODO CUSTOMER.DELETED consume event
-    logger.info(chalk.green(`CUSTOMER.DELETED has been consumed from service: ${process.env.SERVICE_NAME} with deleted customer id: ${content}`))
+    logger.info(
+      chalk.green(
+        `CUSTOMER.DELETED has been consumed from service: ${process.env.SERVICE_NAME} with deleted customer id: ${content}`,
+      ),
+    );
   } catch (err) {
-    console.error(`Error in handling the recieved message - customer.deleted - ${err}`);
+    console.error(
+      `Error in handling the recieved message - customer.deleted - ${err}`,
+    );
   }
 };
 

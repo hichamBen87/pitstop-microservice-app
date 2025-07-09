@@ -9,13 +9,13 @@ services:
       - ./pitstop-webapp:/app/client
     ports:
       - "8081:8080"
-  
+
   pitstop-gateway:
     build:
       context: ./pitstop-express-gateway
     image: msalekmouad/pitstop-express-gateway:dev
     env_file:
-      - ./.env  
+      - ./.env
     container_name: pitstop-express-gateway
     environment:
       - SERVICE_NAME= $GATEWAYAPI_NAME
@@ -47,7 +47,7 @@ services:
       context: ./pitstop-customer
     image: msalekmouad/pitstop-customer:dev
     env_file:
-      - ./.env  
+      - ./.env
     container_name: pitstop-customer
     environment:
       - DB_USER=$DB_USER
@@ -70,7 +70,6 @@ services:
       - rabbitmq
     restart: unless-stopped
 
-
   pitstop-vehicle-database:
     image: mysql:5.7
     container_name: pitstop-vehicle-database
@@ -92,7 +91,7 @@ services:
       context: ./pitstop-vehicle
     image: msalekmouad/pitstop-vehicle:dev
     env_file:
-      - ./.env  
+      - ./.env
     container_name: pitstop-vehicle
     environment:
       - DB_USER=$DB_USER
@@ -115,7 +114,6 @@ services:
       - rabbitmq
     restart: unless-stopped
 
-
   pitstop-workshop-database:
     image: mysql:5.7
     container_name: pitstop-workshop-database
@@ -137,7 +135,7 @@ services:
       context: ./pitstop-workshop-planning
     image: msalekmouad/pitstop-workshop-planning:dev
     env_file:
-      - ./.env  
+      - ./.env
     container_name: pitstop-workshop-planning
     environment:
       - DB_USER=$DB_USER
@@ -164,7 +162,7 @@ services:
     container_name: pitstop-rabbitmq
     image: rabbitmq:3-management
     env_file:
-      - ./.env  
+      - ./.env
     ports:
       - 5672:5672
       - 15672:15672
@@ -174,9 +172,8 @@ services:
     volumes:
       - rabbitmq-data:/data
 
-    
-volumes: 
-  customer-db: 
-  vehicle-db: 
+volumes:
+  customer-db:
+  vehicle-db:
   workshop-db:
   rabbitmq-data:

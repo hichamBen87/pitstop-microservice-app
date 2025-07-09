@@ -41,9 +41,9 @@ metadata:
   name: pitstop-vehicle-database-service
 spec:
   ports:
-   - name: mysql
-     port: 3308
-     targetPort: 3306
+    - name: mysql
+      port: 3308
+      targetPort: 3306
   selector:
     app: pitstop-vehicle-database
   type: ClusterIP
@@ -64,18 +64,18 @@ spec:
         app: pitstop-vehicle-database
     spec:
       containers:
-      - image: mysql:5.6
-        name: mysql
-        envFrom:
+        - image: mysql:5.6
+          name: mysql
+          envFrom:
             - configMapRef:
                 name: pitstop-vehicle-database-configmap
-        ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: vehicledb-persistent-storage
-          mountPath: /var/lib/mysql
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: vehicledb-persistent-storage
+              mountPath: /var/lib/mysql
       volumes:
-      - name: vehicledb-persistent-storage
-        persistentVolumeClaim:
-          claimName: vehicle-db-pv-claim
+        - name: vehicledb-persistent-storage
+          persistentVolumeClaim:
+            claimName: vehicle-db-pv-claim

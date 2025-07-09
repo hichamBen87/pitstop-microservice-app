@@ -3,10 +3,10 @@ name: CI - Customer Service
 on:
   push:
     paths:
-      - 'pitstop-customer/**'
+      - "pitstop-customer/**"
   pull_request:
     paths:
-      - 'pitstop-customer/**'
+      - "pitstop-customer/**"
 
 jobs:
   build-and-push:

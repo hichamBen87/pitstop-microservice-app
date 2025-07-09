@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -11,31 +11,36 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert('Customers', [{
-        name: "Mouad MSALEK",
-        address: "Hay sadri groupe 2 rue 7",
-        city: "Casablanca",
-        email: "MouadMsalek@outlook.com",
-        postCode: "20450",
-        number: "0618346413",
-      },
-      {
-        name: "Anthoine JEVERSON",
-        address: "Maarif boulevard fancy",
-        city: "Casablanca",
-        email: "antoine.jeverson@outlook.com",
-        postCode: "20450",
-        number: "0618346413",
-      },
-      {
-        name: "Nada DOE",
-        address: "Avenue zitouni, chefchaouni",
-        city: "Fès",
-        email: "nada.doe@gmail.com",
-        postCode: "20450",
-        number: "0618346413",
-      }
-    ], {});
+    await queryInterface.bulkInsert(
+      "Customers",
+      [
+        {
+          name: "Mouad MSALEK",
+          address: "Hay sadri groupe 2 rue 7",
+          city: "Casablanca",
+          email: "MouadMsalek@outlook.com",
+          postCode: "20450",
+          number: "0618346413",
+        },
+        {
+          name: "Anthoine JEVERSON",
+          address: "Maarif boulevard fancy",
+          city: "Casablanca",
+          email: "antoine.jeverson@outlook.com",
+          postCode: "20450",
+          number: "0618346413",
+        },
+        {
+          name: "Nada DOE",
+          address: "Avenue zitouni, chefchaouni",
+          city: "Fès",
+          email: "nada.doe@gmail.com",
+          postCode: "20450",
+          number: "0618346413",
+        },
+      ],
+      {},
+    );
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -45,5 +50,5 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };

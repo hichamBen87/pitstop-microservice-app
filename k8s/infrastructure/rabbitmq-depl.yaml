@@ -17,33 +17,33 @@ spec:
   serviceName: pitstop-rabbitmq-service
   replicas: 1
   volumeClaimTemplates:
-  - metadata:
-      name: rabbitmq-data
-    spec:
-      storageClassName: "standard"
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: "6Gi"
+    - metadata:
+        name: rabbitmq-data
+      spec:
+        storageClassName: "standard"
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: "6Gi"
   template:
     metadata:
       labels:
         app: pitstop-rabbitmq
     spec:
       containers:
-      - name: pitstop-rabbitmq
-        image: rabbitmq:3-management
-        envFrom:
+        - name: pitstop-rabbitmq
+          image: rabbitmq:3-management
+          envFrom:
             - configMapRef:
                 name: pitstop-rabbitmq-configmap
-        ports:
-        - name: amqp
-          containerPort: 5672
-          protocol: TCP
-        - name: management
-          containerPort: 15672
-          protocol: TCP
+          ports:
+            - name: amqp
+              containerPort: 5672
+              protocol: TCP
+            - name: management
+              containerPort: 15672
+              protocol: TCP
 ---
 kind: Service
 apiVersion: v1
@@ -52,10 +52,10 @@ metadata:
 spec:
   type: NodePort
   ports:
-   - name: http
-     protocol: TCP
-     port: 15672
-     targetPort: management
+    - name: http
+      protocol: TCP
+      port: 15672
+      targetPort: management
   selector:
     app: pitstop-rabbitmq
 ---
@@ -66,9 +66,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-   - name: amqp
-     protocol: TCP
-     port: 5672
-     targetPort: amqp
+    - name: amqp
+      protocol: TCP
+      port: 5672
+      targetPort: amqp
   selector:
     app: pitstop-rabbitmq

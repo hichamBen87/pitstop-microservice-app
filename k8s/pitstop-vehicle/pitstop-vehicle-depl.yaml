@@ -3,17 +3,17 @@ kind: ConfigMap
 metadata:
   name: pitstop-vehicle-configmap
 data:
-    DB_USER: pitstop-user
-    DB_PASSWORD: pitstop-user
-    DB_NAME: pitstop
-    DB_HOST: pitstop-vehicle-database-service
-    DB_PORT: "3308"
-    SERVICE_NAME: pitstop-vehicle
-    PORT: "3002"
-    MESSAGE_BUS: pitstop-rabbitmq-service
-    MESSAGE_BUS_USERNAME: pitstop
-    MESSAGE_BUS_PASSWORD: pitstop
-    MESSAGE_BUS_TIMEOUT: "500"
+  DB_USER: pitstop-user
+  DB_PASSWORD: pitstop-user
+  DB_NAME: pitstop
+  DB_HOST: pitstop-vehicle-database-service
+  DB_PORT: "3308"
+  SERVICE_NAME: pitstop-vehicle
+  PORT: "3002"
+  MESSAGE_BUS: pitstop-rabbitmq-service
+  MESSAGE_BUS_USERNAME: pitstop
+  MESSAGE_BUS_PASSWORD: pitstop
+  MESSAGE_BUS_TIMEOUT: "500"
 
 ---
 apiVersion: apps/v1

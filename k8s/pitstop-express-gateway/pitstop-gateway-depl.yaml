@@ -3,10 +3,10 @@ kind: ConfigMap
 metadata:
   name: pitstop-gateway-configmap
 data:
-    PORT: "8080"
-    CUSTOMER_URL: "pitstop-customer-service:3001"
-    VEHICLE_URL: "pitstop-vehicle-service:3002"
-    WORKSHOP_URL: "pitstop-workshop-service:3003"
+  PORT: "8080"
+  CUSTOMER_URL: "pitstop-customer-service:3001"
+  VEHICLE_URL: "pitstop-vehicle-service:3002"
+  WORKSHOP_URL: "pitstop-workshop-service:3003"
 
 ---
 apiVersion: apps/v1

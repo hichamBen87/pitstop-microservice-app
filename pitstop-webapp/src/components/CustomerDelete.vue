@@ -14,9 +14,7 @@
         <v-btn color="secondary" text @click="deleteConfirmation = false">
           Cancel
         </v-btn>
-        <v-btn color="red" text @click="deleteCustomer">
-          Delete
-        </v-btn>
+        <v-btn color="red" text @click="deleteCustomer"> Delete </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -36,12 +34,12 @@ export default {
     async deleteCustomer() {
       //TODO delete customer
       let deleted = await this.DELETE_CUSTOMER(this.customer.id);
-      if(deleted) {
+      if (deleted) {
         this.deleteConfirmation = false;
         await this.FETCH_CUSTOMERS();
-        alert(`Customer ${this.customer.name} has been deleted successfully`)
+        alert(`Customer ${this.customer.name} has been deleted successfully`);
       }
     },
   },
-}
+};
 </script>

@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 //controllers
@@ -7,14 +7,14 @@ let {
   allVehicles,
   registerVehicle,
   deleteVehicle,
-  allCustomers
+  allCustomers,
 } = require("../controllers/vehiclesController");
 
 /* GET ping (testing ). */
-router.get('/ping', pingPong);
+router.get("/ping", pingPong);
 
 /* GET customers (get customers list ). */
-router.get('/customers/all', allCustomers);
+router.get("/customers/all", allCustomers);
 
 /* GET /api/vehicles/all (list all registered vehicles) */
 router.get("/all", allVehicles);

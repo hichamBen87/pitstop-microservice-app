@@ -16,13 +16,15 @@
               max-height="500"
               gradient="90deg, rgba(123,31,162,0.7329132336528361) 0%, rgba(135,1,191,0.7245098723082983) 100%"
             >
-              <v-row class="white--text text-center no-gutters align-center justify-center fill-height">
+              <v-row
+                class="white--text text-center no-gutters align-center justify-center fill-height"
+              >
                 <v-col cols="12">
                   <h1 class="text-h4 font-weight-bold mb-4 text-uppercase">
                     pit<span class="font-weight-thin">stop</span>
                   </h1>
                   <h2 class="text-h4 green--text text-center font-weight-bold">
-                   Powered by Hicham Benjabrou
+                    Powered by Hicham Benjabrou
                   </h2>
                 </v-col>
               </v-row>
@@ -68,5 +70,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

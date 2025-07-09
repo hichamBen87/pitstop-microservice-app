@@ -42,9 +42,9 @@ metadata:
   name: pitstop-customer-database-service
 spec:
   ports:
-   - name: mysql
-     port: 3307
-     targetPort: 3306
+    - name: mysql
+      port: 3307
+      targetPort: 3306
   selector:
     app: pitstop-customer-database
   type: ClusterIP
@@ -65,18 +65,18 @@ spec:
         app: pitstop-customer-database
     spec:
       containers:
-      - image: mysql:5.6
-        name: mysql
-        envFrom:
+        - image: mysql:5.6
+          name: mysql
+          envFrom:
             - configMapRef:
                 name: pitstop-customer-database-configmap
-        ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: customerdb-persistent-storage
-          mountPath: /var/lib/mysql
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: customerdb-persistent-storage
+              mountPath: /var/lib/mysql
       volumes:
-      - name: customerdb-persistent-storage
-        persistentVolumeClaim:
-          claimName: customer-db-pv-claim
+        - name: customerdb-persistent-storage
+          persistentVolumeClaim:
+            claimName: customer-db-pv-claim

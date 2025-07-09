@@ -6,13 +6,13 @@ admin:
 apiEndpoints:
   pitstop-customer:
     host: localhost
-    paths: '/api/customers/*'
+    paths: "/api/customers/*"
   pitstop-vehicle:
     host: localhost
-    paths: '/api/vehicles/*'
+    paths: "/api/vehicles/*"
   pitstop-workshop:
     host: localhost
-    paths: '/api/workshop/*'
+    paths: "/api/workshop/*"
 serviceEndpoints:
   pitstop-customer-service:
     url: ${CUSTOMER_URL:-'http://pitstop-customer-service:3001'}
@@ -20,8 +20,7 @@ serviceEndpoints:
     url: ${VEHICLE_URL:-'http://pitstop-vehicle-service:3002'}
   pitstop-workshop-service:
     url: ${WORKSHOP_URL:-'http://pitstop-workshop-service:3003'}
-    
- 
+
 policies:
   - basic-auth
   - cors

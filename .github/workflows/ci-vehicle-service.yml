@@ -3,10 +3,10 @@ name: CI - Vehicle Service
 on:
   push:
     paths:
-      - 'pitstop-vehicle/**'
+      - "pitstop-vehicle/**"
   pull_request:
     paths:
-      - 'pitstop-vehicle/**'
+      - "pitstop-vehicle/**"
 
 jobs:
   build-and-push:

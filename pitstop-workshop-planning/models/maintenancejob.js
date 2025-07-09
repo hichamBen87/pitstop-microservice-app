@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class MaintenanceJob extends Model {
     /**
@@ -13,19 +11,22 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       MaintenanceJob.belongsTo(models.Vehicle, {
         foreignKey: "vehicle",
-        onDelete: 'CASCADE'
-      })
+        onDelete: "CASCADE",
+      });
     }
-  };
-  MaintenanceJob.init({
-    startTime: DataTypes.DATE,
-    endTime: DataTypes.DATE,
-    description: DataTypes.STRING,
-    status: DataTypes.STRING,
-    vehicle: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'MaintenanceJob',
-  });
+  }
+  MaintenanceJob.init(
+    {
+      startTime: DataTypes.DATE,
+      endTime: DataTypes.DATE,
+      description: DataTypes.STRING,
+      status: DataTypes.STRING,
+      vehicle: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "MaintenanceJob",
+    },
+  );
   return MaintenanceJob;
 };

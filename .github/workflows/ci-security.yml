@@ -15,7 +15,7 @@ jobs:
   sast:
     needs: prepare
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    # if: github.event_name == 'pull_request'  ← ligne désactivée pour autoriser le push
     defaults:
       run:
         working-directory: pitstop-webapp
@@ -139,7 +139,7 @@ jobs:
   # ────────────── NOTIFY (Slack) ──────────────
   notify:
     if: always()
-    needs: [image-scan, dast]
+    needs: [sast, image-scan, dast]
     runs-on: ubuntu-latest
 
     steps:

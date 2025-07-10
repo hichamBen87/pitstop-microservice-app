@@ -14,7 +14,7 @@ jobs:
   # ────────────── SAST (Sonar + Semgrep) ──────────────
   sast:
     needs: prepare
-    runs-on: [self-hosted, docker]
+    runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     defaults:
       run:
@@ -52,7 +52,7 @@ jobs:
   # ────────────── IMAGE SCAN (Trivy + Snyk) ──────────────
   image-scan:
     needs: prepare
-    runs-on: [self-hosted, docker]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -135,10 +135,11 @@ jobs:
             report_html.html
             report_md.md
             report_json.json
+
   # ────────────── NOTIFY (Slack) ──────────────
   notify:
     if: always()
-    needs: [image-scan, dast] # retirer `sast` ici
+    needs: [image-scan, dast]
     runs-on: ubuntu-latest
 
     steps:

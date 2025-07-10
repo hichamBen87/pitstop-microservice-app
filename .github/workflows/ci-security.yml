@@ -15,7 +15,7 @@ jobs:
   sast:
     needs: prepare
     runs-on: ubuntu-latest
-    # if: github.event_name == 'pull_request'  ← ligne désactivée pour autoriser le push
+    # if: github.event_name == 'pull_request'
     defaults:
       run:
         working-directory: pitstop-webapp
@@ -157,3 +157,21 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # ────────────── CLEANUP ──────────────
+  cleanup:
+    if: always()
+    needs: [notify]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Remove temporary files
+        run: |
+          echo "Suppression des fichiers temporaires..."
+          rm -f trivy-report.txt report_*.*
+
+      - name: Cleanup Docker
+        run: |
+          echo "Nettoyage des images Docker..."
+          docker image rm webapp:test || true
+          docker system prune -f -a --volumes || true

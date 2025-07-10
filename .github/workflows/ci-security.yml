@@ -160,18 +160,10 @@ jobs:
 
   # ────────────── CLEANUP ──────────────
   cleanup:
-    if: always()
-    needs: [notify]
+    if: always() # S'exécute même si les jobs précédents échouent
+    needs: notify
     runs-on: ubuntu-latest
 
     steps:
-      - name: Remove temporary files
-        run: |
-          echo "Suppression des fichiers temporaires..."
-          rm -f trivy-report.txt report_*.*
-
-      - name: Cleanup Docker
-        run: |
-          echo "Nettoyage des images Docker..."
-          docker image rm webapp:test || true
-          docker system prune -f -a --volumes || true
+      - name: Test Cleanup Step
+        run: echo "✅ Cleanup job executed successfully!"

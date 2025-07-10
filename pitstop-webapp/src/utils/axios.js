@@ -1,7 +1,7 @@
-import Axios from "axios"
+import Axios from "axios";
 
 let API_GATEWAY = Axios.create({
-    baseURL: "http://localhost:8080"
+  baseURL: "http://localhost:8080",
 });
 
 // let CustomerAPI = Axios.create({
@@ -24,9 +24,8 @@ let API_GATEWAY = Axios.create({
 //     return Promise.reject(error);
 // });
 export {
-    API_GATEWAY,
-    // CustomerAPI,
-    // VehicleAPI,
-    // WorkshopAPI
-    
-}
+  API_GATEWAY,
+  // CustomerAPI,
+  // VehicleAPI,
+  // WorkshopAPI
+};

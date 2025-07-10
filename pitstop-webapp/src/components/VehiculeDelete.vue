@@ -15,9 +15,7 @@
         <v-btn color="secondary" text @click="deleteConfirmation = false">
           Cancel
         </v-btn>
-        <v-btn color="red" text @click="deleteVehicle">
-          Delete
-        </v-btn>
+        <v-btn color="red" text @click="deleteVehicle"> Delete </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app>
     <!--Navigation drawer -->
     <v-navigation-drawer app class="deep-purple accent-4" dark permanent>
       <!-- Logo and name -->
@@ -13,13 +13,7 @@
         </v-flex>
         <v-flex class="mt-4">
           <p
-            class="
-              text-center
-              white--text
-              text-h5
-              font-weight-light
-              text-uppercase
-            "
+            class="text-center white--text text-h5 font-weight-light text-uppercase"
           >
             Pit<span class="font-weight-medium">stop</span>
           </p>

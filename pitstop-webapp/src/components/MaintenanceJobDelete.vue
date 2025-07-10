@@ -14,15 +14,13 @@
         <v-btn color="secondat" text @click="deleteConfirmation = false">
           Cancel
         </v-btn>
-        <v-btn color="red" text @click="deleteJob">
-          Delete
-        </v-btn>
+        <v-btn color="red" text @click="deleteJob"> Delete </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 <script>
-import { mapGetters, mapActions} from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: ["job"],

@@ -21,4 +21,4 @@ spec:
             - containerPort: 3000
           env:
             - name: DB_HOST
-              value: "localhost"  # À modifier si tu relies à une vraie base plus tard
+              value: "localhost" # À modifier si tu relies à une vraie base plus tard

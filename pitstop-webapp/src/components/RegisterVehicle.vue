@@ -71,7 +71,12 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" :disabled="getLoadingVehicles" text @click="dialog = false">
+        <v-btn
+          color="primary"
+          :disabled="getLoadingVehicles"
+          text
+          @click="dialog = false"
+        >
           Close
         </v-btn>
         <v-btn
@@ -149,7 +154,7 @@ export default {
         console.log(this.vehicle);
         //TODO register vehicle
         let added = await this.ADD_VEHICLE(this.vehicle);
-        if(added){
+        if (added) {
           this.dialog = false;
           alert(`customer ${this.vehicle.license} has been added successfully`);
         }
@@ -158,7 +163,7 @@ export default {
   },
   async beforeMount() {
     //TODO load customers
-    await this.FETCH_CUSTOMERS_VEHICLES()
+    await this.FETCH_CUSTOMERS_VEHICLES();
   },
 };
 </script>

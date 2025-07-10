@@ -1,7 +1,13 @@
 <template>
   <v-container class="pa-15" fluid>
     <!-- Offline service overlay -->
-    <v-overlay :absolute="true" :value="true" color="white" opacity="1" v-if="getCustomerServiceOffline">
+    <v-overlay
+      :absolute="true"
+      :value="true"
+      color="white"
+      opacity="1"
+      v-if="getCustomerServiceOffline"
+    >
       <v-row class="fill-height no-gutters justify-center align-center">
         <v-col cols="12" class="d-flex flex-column align-center justify-center">
           <img
@@ -61,7 +67,11 @@ export default {
     "customer-delete": CustomerDelete,
   },
   computed: {
-    ...mapGetters(["getLoadingCustomers", "getCustomers", "getCustomerServiceOffline"]),
+    ...mapGetters([
+      "getLoadingCustomers",
+      "getCustomers",
+      "getCustomerServiceOffline",
+    ]),
   },
   data: () => ({
     headers: [
@@ -89,12 +99,12 @@ export default {
       console.log(item);
     },
   },
-  async beforeMount(){
+  async beforeMount() {
     await this.CUSTOMER_SERVICE_AVAILABILITY();
   },
   async mounted() {
     //TODO Load Customers
-    if(!this.getCustomerServiceOffline){
+    if (!this.getCustomerServiceOffline) {
       await this.FETCH_CUSTOMERS();
     }
   },

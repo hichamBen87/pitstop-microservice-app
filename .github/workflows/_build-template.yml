@@ -1,0 +1,17 @@
+name: Build Template
+
+on:
+  workflow_call:
+    outputs:
+      success:
+        description: "Prepare step completed"
+        value: ${{ jobs.build_job.outputs.success }}
+
+jobs:
+  build_job:
+    runs-on: self-hosted
+    outputs:
+      success: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "generic build"

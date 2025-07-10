@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 //controllers
@@ -10,31 +10,31 @@ let {
   scheduleJob,
   deleteMaintenanceJob,
   completeJob,
-  jobDetails
+  jobDetails,
 } = require("../controllers/workshopController");
 
 /* GET users listing. */
-router.get('/ping', pingPong);
+router.get("/ping", pingPong);
 
 /* GET vehicles (get vehicles list ). */
-router.get('/vehicles/all', allVehicles);
+router.get("/vehicles/all", allVehicles);
 
 /* GET maintenance jobs for a specific day */
-router.get('/jobs/all/:date', allJobsDay);
+router.get("/jobs/all/:date", allJobsDay);
 
 /* GET maintenance jobs  */
-router.get('/jobs/all', allJobs);
+router.get("/jobs/all", allJobs);
 
 /* GET maintenance job details  */
-router.get('/jobs/:id', jobDetails);
+router.get("/jobs/:id", jobDetails);
 
 /* POST schedule a maintenance job */
-router.post('/jobs/schedule', scheduleJob);
+router.post("/jobs/schedule", scheduleJob);
 
 /* DELETE delete a maintenance job  */
-router.delete('/jobs/:id', deleteMaintenanceJob);
+router.delete("/jobs/:id", deleteMaintenanceJob);
 
 /* PUT Complete a maintenance job  */
-router.put('/jobs/complete/:id', completeJob);
+router.put("/jobs/complete/:id", completeJob);
 
 module.exports = router;

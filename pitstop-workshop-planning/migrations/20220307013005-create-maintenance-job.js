@@ -1,47 +1,49 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('MaintenanceJobs', {
+    await queryInterface.createTable("MaintenanceJobs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       startTime: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       endTime: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       vehicle: {
         type: Sequelize.STRING,
-        onDelete: 'CASCADE',
+        onDelete: "CASCADE",
         references: {
-          model: 'Vehicles',
-          key: 'license',
-          as: 'vehicle',
-        }
+          model: "Vehicles",
+          key: "license",
+          as: "vehicle",
+        },
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP()"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()')
-      }
+        defaultValue: Sequelize.literal(
+          "CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()",
+        ),
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('MaintenanceJobs');
-  }
+    await queryInterface.dropTable("MaintenanceJobs");
+  },
 };

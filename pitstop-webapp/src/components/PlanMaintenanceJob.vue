@@ -113,7 +113,15 @@
                   item-value="license"
                   :item-text="
                     (row) => {
-                      return row.brand + ' ' + row.type + ' - ' + row.license + ' - ' + row.owner.name;
+                      return (
+                        row.brand +
+                        ' ' +
+                        row.type +
+                        ' - ' +
+                        row.license +
+                        ' - ' +
+                        row.owner.name
+                      );
                     }
                   "
                   outlined
@@ -192,9 +200,9 @@ export default {
         //TODO plan a maintenance job
         let added = await this.SCHEDULE_JOB({
           date: this.date,
-          ...this.maintenanceJob
+          ...this.maintenanceJob,
         });
-         if(added != false){
+        if (added != false) {
           this.dialog = false;
           alert(added);
         }

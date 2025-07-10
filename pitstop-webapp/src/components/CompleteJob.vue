@@ -36,12 +36,12 @@ export default {
     ...mapActions(["FETCH_JOBS", "COMPLETE_JOB"]),
     async finishJob() {
       //TODO complete job
-        let completed = await this.COMPLETE_JOB(this.job.id);
-        if (completed) {
-          this.completeJob = false;
-          await this.FETCH_JOBS();
-          alert(completed);
-        }
+      let completed = await this.COMPLETE_JOB(this.job.id);
+      if (completed) {
+        this.completeJob = false;
+        await this.FETCH_JOBS();
+        alert(completed);
+      }
     },
   },
 };

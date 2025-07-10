@@ -58,11 +58,11 @@
           </span>
           <div class="d-flex align-center justify-center">
             <v-chip dark v-if="details.status == 'planned'" color="orange">
-                    <v-icon left>mdi-wrench-clock</v-icon> Planned</v-chip
-                  >
-                  <v-chip dark v-if="details.status == 'completed'" color="green">
-                    <v-icon left>mdi-check</v-icon> Completed</v-chip
-                  >
+              <v-icon left>mdi-wrench-clock</v-icon> Planned</v-chip
+            >
+            <v-chip dark v-if="details.status == 'completed'" color="green">
+              <v-icon left>mdi-check</v-icon> Completed</v-chip
+            >
           </div>
         </div>
       </v-card-text>

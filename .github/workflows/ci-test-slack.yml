@@ -1,0 +1,19 @@
+name: Test Slack Notify
+
+on:
+  push:
+    branches: [test-image-scan]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack test notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": ":tada: Slack webhook fonctionne !\nRepo: `${{ github.repository }}`\nBranch: `${{ github.ref }}`"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
